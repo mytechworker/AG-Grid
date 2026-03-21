@@ -1,0 +1,71 @@
+<div class="flex flex-col h-screen" [style.background]="'var(--bg-primary)'">
+  <!-- Toolbar -->
+  <app-toolbar
+    [departments]="departments"
+    [roles]="roles"
+    [countries]="countries"
+    [totalRows]="totalRecords"
+    [isDark]="themeService.isDark()"
+    (themeToggle)="onThemeToggle()"
+    (searchChange)="onSearchChange($event)"
+    (filtersChange)="onFiltersChange($event)"
+    (resetFilters)="onResetFilters()"
+    (exportCsv)="onExportCsv()"
+    (exportExcel)="onExportExcel()">
+  </app-toolbar>
+
+  <!-- Stats Bar -->
+  <app-stats-bar
+    [totalRecords]="totalRecords"
+    [renderTime]="renderTime"
+    [activeFilters]="activeFilters"
+    >
+  </app-stats-bar>
+
+  <!-- AG Grid -->
+  <div class="flex-1">
+    <ag-grid-angular
+      class="w-full h-full"
+      [theme]="gridTheme"
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef"
+      [rowData]="rowData"
+      [context]="gridContext"
+      [pagination]="true"
+      [paginationPageSize]="paginationPageSize"
+      [paginationPageSizeSelector]="paginationPageSizeSelector"
+      [animateRows]="false"
+      [rowBuffer]="10"
+      [getRowId]="getRowId"
+      [suppressColumnVirtualisation]="false"
+      [cacheQuickFilter]="true"
+      [rowHeight]="40"
+      [headerHeight]="45"
+      [overlayLoadingTemplate]="loadingTemplate"
+      [overlayNoRowsTemplate]="noRowsTemplate"
+      (gridReady)="onGridReady($event)"
+      (selectionChanged)="onSelectionChanged()"
+      (filterChanged)="onFilterChanged()">
+    </ag-grid-angular>
+  </div>
+
+  <!-- Detail Panel -->
+  <app-detail-panel
+    [employee]="selectedEmployee"
+    [isOpen]="detailPanelOpen"
+    [mode]="panelMode"
+    (close)="closeDetailPanel()"
+    (save)="onSaveEmployee($event)">
+  </app-detail-panel>
+
+  <!-- Confirmation Dialog -->
+  <app-confirm-dialog
+    [isOpen]="showConfirmDialog"
+    [title]="confirmTitle"
+    [message]="confirmMessage"
+    [confirmLabel]="confirmLabel"
+    [type]="confirmType"
+    (confirm)="onConfirmAction()"
+    (cancel)="onCancelAction()">
+  </app-confirm-dialog>
+</div>
