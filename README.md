@@ -76,3 +76,4 @@ To connect to a real backend:
 3. Consider switching to AG-Grid Enterprise Server-Side Row Model
 4. Add authentication and authorization
 5. Implement caching strategies for frequently accessed data
+# AG-Grid
